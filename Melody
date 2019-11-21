@@ -77,20 +77,58 @@ public class Melody {
     }
 
     public double getTotalDuration() {
-// TODO: write this method
-        return 0.0;
+        double total = 0;
+        for (int i = 0; i < melody.length; i++) {
+            if (melody[i].isRepeat() == false) {
+                total += melody[i].getDuration();
+            } else {
+                int num = i;
+                double time = melody[i].getDuration();
+                boolean end = false;
+                while (end == false) {
+                    for (int j = i+1; j < melody.length; j++) {
+                        num++;
+                        if (melody[j].isRepeat() == false) {
+                            time += melody[j].getDuration();
+                        } else {
+                            time += melody[j].getDuration();
+                            end = true;
+                           
+                        }
+                    }
+                }
+                total += time;
+              i=num;
+            }
+        }
+        return total;
     }
 
     public boolean octaveDown() {
-// TODO: write this method
-        return false;
-    }
+        for (int i = 0; i < melody.length; i++) {
+           if(melody[i].getOctave()==1){
+              return false;
+            }
+        }
+        for (int i = 0; i < melody.length; i++) {
+        melody[i].setOctave(melody[i].getOctave()-1);
+            } 
+        return true;
+        }
+       
+    
 
     public boolean octaveUp() {
-// TODO: write this method
-        return false;
-    }
-
+    for (int i = 0; i < melody.length; i++) {
+           if(melody[i].getOctave()==10){
+              return false;
+            }
+        }
+        for (int i = 0; i < melody.length; i++) {
+        melody[i].setOctave(melody[i].getOctave()+1);
+            } 
+        return true;
+        }
     public void play() {
 // TODO: write this method
     }
