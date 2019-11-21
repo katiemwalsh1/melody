@@ -64,8 +64,9 @@ public class Melody {
     }
 
     public void changeTempo(double ratio) {
-// TODO: write this method
-
+        for (int i = 0; i < melody.length; i++){
+            melody[i].setDuration(melody[i].getDuration() * ratio);
+        }
     }
 
     public String getArtist() {
@@ -129,13 +130,46 @@ public class Melody {
             } 
         return true;
         }
+    
     public void play() {
-// TODO: write this method
+        ArrayList<Note> rNotes = new ArrayList<Note>();
+        ArrayList<Note> newMelody = new ArrayList<Note>();
+        for(int i = 0; i < melody.length; i++){
+            if(melody[i].isRepeat()){
+                rNotes.add(melody[i]);
+                newMelody.add(melody[i]);
+                for (int j = i+1; j<melody.length; j++){
+                    rNotes.add(melody[j]);
+                    newMelody.add(melody[j]);
+                    if(melody[j].isRepeat()){
+                        for(int s = 0; s < rNotes.size(); s++){
+                            newMelody.add(rNotes.get(s));
+                            i = j+1;
+                        }
+                        break;
+                    }
+                }
+            }
+            newMelody.add(melody[i]);
+        }
+        for(int k = 0; k < melody.length; k++){
+            newMelody.get(k).play();
+        }
     }
 
     public void reverse() {
-// TODO: write this method
+       Note[] tempArr = new Note[melody.length];
+       int j = 0;
+       for (int i = melody.length; i > 0; i--){
+           tempArr[j] = melody[i];
+           j++;
+       }
+       for (int i = 0; i < melody.length; i++){
+           melody[i] = tempArr[i];
+       }
     }
+
+
 
     public String toString() {
 // TODO: write this method
