@@ -1,0 +1,106 @@
+
+/**
+ *
+ * @author KatieWalsh
+ */
+// TODO: write this class
+import java.util.*;
+import java.io.*;
+import melody.audio.*;
+
+public class Melody {
+
+    private String artist;
+    private String title;
+    private Note[] melody;
+
+    public Melody(File file) throws IOException {
+        Scanner reader = new Scanner(file);
+        title = reader.nextLine();
+        artist = reader.nextLine();
+        String numOfNotes = reader.nextLine();
+        int size = Integer.parseInt(numOfNotes);
+        melody = new Note[size];
+        String line = "";
+        int m = 0;
+        while (reader.hasNextLine()) {
+            line = reader.nextLine();
+            int space1 = line.indexOf(" ");
+            String endOfLine = line.substring(space1 + 5);
+            int space2 = endOfLine.indexOf(" ");
+            double duration = 0.0;
+            String pitch = "";
+            int octave = 0;
+            String accidental = "";
+            boolean repeat = false;
+            for (int i = 4; i < size + 1; i++) {
+                duration = Double.parseDouble(line.substring(0, space1));
+                pitch = line.substring(space1, space1 + 2);
+                octave = Integer.parseInt(line.substring(space1 + 3, space1 + 4));
+                accidental = line.substring(space1 + 5, space2);
+                repeat = Boolean.parseBoolean(endOfLine.substring(space2));
+
+                Accidental a = null;
+                if (accidental.equals("SHARP")) {
+                    a = Accidental.SHARP;
+                } else if (accidental.equals("NATURAL")) {
+                    a = Accidental.NATURAL;
+                } else if (accidental.equals("FLAT")) {
+                    a = Accidental.FLAT;
+                }
+
+                String[] pitches = new String[]{"A", "B", "C", "D", "E", "F", "G"};
+                Pitch[] notePitches = new Pitch[]{Pitch.A, Pitch.B, Pitch.C, Pitch.D, Pitch.E, Pitch.F, Pitch.G};
+                Pitch notePitch = null;
+                for (int j = 0; j < 7; j++) {
+                    if (pitches[j].equals(pitch)) {
+                        notePitch = notePitches[j];
+                    }
+
+                }
+                Note n = new Note(duration, notePitch, octave, a, repeat);
+            }
+        }
+    }
+
+    public void changeTempo(double ratio) {
+// TODO: write this method
+
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public double getTotalDuration() {
+// TODO: write this method
+        return 0.0;
+    }
+
+    public boolean octaveDown() {
+// TODO: write this method
+        return false;
+    }
+
+    public boolean octaveUp() {
+// TODO: write this method
+        return false;
+    }
+
+    public void play() {
+// TODO: write this method
+    }
+
+    public void reverse() {
+// TODO: write this method
+    }
+
+    public String toString() {
+// TODO: write this method
+        return "";
+    }
+}
