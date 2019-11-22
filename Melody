@@ -132,8 +132,8 @@ public class Melody {
         }
     
     public void play() {
-        ArrayList<Note> rNotes = new ArrayList<Note>();
-        ArrayList<Note> newMelody = new ArrayList<Note>();
+        ArrayList<Note> rNotes = new ArrayList<>();
+        ArrayList<Note> newMelody = new ArrayList<>();
         for(int i = 0; i < melody.length; i++){
             if(melody[i].isRepeat()){
                 rNotes.add(melody[i]);
@@ -168,7 +168,20 @@ public class Melody {
            melody[i] = tempArr[i];
        }
     }
-
+    
+    public void mergeMelody(Melody melody2){
+        ArrayList<Note> newMelody = new ArrayList<>();
+        for(int j = 0; j < melody.length; j++){
+            newMelody.add(melody[j]);
+        }
+        for(int i = 0; i < melody2.melody.length; i++){
+            newMelody.add(melody2.melody[i]);
+        }
+        melody = new Note[newMelody.size()];
+        for(int s = 0; s<melody.length; s ++){
+            melody[s] = newMelody.get(s);
+        }
+    }
 
 
     public String toString() {
