@@ -160,7 +160,7 @@ public class Melody {
     public void reverse() {
        Note[] tempArr = new Note[melody.length];
        int j = 0;
-       for (int i = melody.length; i > 0; i--){
+       for (int i = melody.length; i > 0; i--){ //this may have to be i>-1
            tempArr[j] = melody[i];
            j++;
        }
